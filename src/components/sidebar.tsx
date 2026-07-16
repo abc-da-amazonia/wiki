@@ -94,7 +94,7 @@ export function AppSidebar() {
                     onClick={() => navigate(routes.home)}
                 >
                     <img
-                        src="/logo.jpg"
+                        src={import.meta.env.BASE_URL + "logo.jpg"}
                         className="h-14 w-14 rounded-lg object-cover"
                     />
 
