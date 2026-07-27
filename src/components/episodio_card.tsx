@@ -110,7 +110,7 @@ export function EpisodioCard({ episodio }: EpisodioCardProps) {
                     {toTitleCase(episodio.titulo)}
                 </h3>
 
-                {episodio.status && (
+                {episodio.status === "completo" && (
                     <Button
                         size="sm"
                         onClick={() => {
@@ -169,9 +169,10 @@ export function EpisodioCard({ episodio }: EpisodioCardProps) {
 
                         <TriangleAlert className="h-4 w-4" />
 
-                        {episodio.status === "perdido"
-                            ? "Episódio perdido"
-                            : "Vídeo indisponível"}
+                        {episodio.status === "perdido" ? "Episódio perdido" : 
+                            episodio.status === "incompleto" ? "Episódio incompleto" : 
+                            "Vídeo indisponível"
+                        }
 
                     </div>
 
@@ -190,6 +191,26 @@ export function EpisodioCard({ episodio }: EpisodioCardProps) {
                             </p>
                         </>
 
+                    ) : episodio.status === "incompleto" ? (
+                        <>
+                            <p className="text-muted-foreground">
+                                Este episódio é considerado <strong>incompleto</strong>.
+                                Ele foi mapeado como existente, mas sem conteúdo ainda não foi adicionado na wiki.
+                            </p>
+                            <p className="text-muted-foreground">
+                                Caso tenha informações sobre este episódio, por favor, contribua adicionando-as ao projeto.
+                            </p>
+                             <p className="mt-3">
+                                Acesse{" "}
+                                <strong
+                                    onClick={() => navigate(routes.colaboracao)}
+                                    className="text-blue-500 hover:cursor-pointer hover:underline"
+                                >
+                                    Colaboração
+                                </strong>{" "}
+                                para ajudar.
+                            </p>
+                        </>
                     ) : (
 
                         <>
