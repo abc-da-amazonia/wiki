@@ -125,66 +125,68 @@ export default function EpisodiosPage() {
       </Helmet>
 
       <div className="flex gap-3">
-
-        <Input
-          placeholder="Buscar episódio..."
-          value={searchSource === "episodios" ? search : ""}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setSearchSource("episodios");
-            setPage(1);
-          }}
-        />
-        {statusDisponiveis.length > 0 && (
-          <Select
-            value={statusEpisodios}
-            onValueChange={(value: EEpisodioStatus) => {
-              setStatusEpisodios(value);
+        <div className="flex flex-col gap-3 w-full md:flex-row md:items-center md:justify-between">
+          <Input
+            placeholder="Buscar episódio..."
+            value={searchSource === "episodios" ? search : ""}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setSearchSource("episodios");
               setPage(1);
             }}
-          >
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
+          />
+          <div className="flex gap-2">
+            {statusDisponiveis.length > 0 && (
+              <Select
+                value={statusEpisodios}
+                onValueChange={(value: EEpisodioStatus) => {
+                  setStatusEpisodios(value);
+                  setPage(1);
+                }}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
 
-            <SelectContent>
-              <SelectItem value="todos">
-                Todos os episódios
-              </SelectItem>
+                <SelectContent>
+                  <SelectItem value="todos">
+                    Todos os episódios
+                  </SelectItem>
 
-              {statusDisponiveis.map((item) => (
-                <SelectItem
-                  key={item.value}
-                  value={item.value}
-                >
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
+                  {statusDisponiveis.map((item) => (
+                    <SelectItem
+                      key={item.value}
+                      value={item.value}
+                    >
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
 
-        <Button
-          variant={
-            viewMode === "abc"
-              ? "default"
-              : "outline"
-          }
-          onClick={() => setViewMode("abc")}
-        >
-          ABC
-        </Button>
-        <Button
-          variant={
-            viewMode === "lista"
-              ? "default"
-              : "outline"
-          }
-          onClick={() => setViewMode("lista")}
-        >
-          Lista
-        </Button>
-
+            <Button
+              variant={
+                viewMode === "abc"
+                  ? "default"
+                  : "outline"
+              }
+              onClick={() => setViewMode("abc")}
+            >
+              ABC
+            </Button>
+            <Button
+              variant={
+                viewMode === "lista"
+                  ? "default"
+                  : "outline"
+              }
+              onClick={() => setViewMode("lista")}
+            >
+              Lista
+            </Button>
+          </div>
+        </div>
 
       </div>
       {usandoBuscaGlobal && (
